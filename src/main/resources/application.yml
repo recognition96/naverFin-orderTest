@@ -1,0 +1,18 @@
+server:
+  error:
+    include-exception: true
+    include-stacktrace: always
+
+spring:
+  profiles:
+    active: local
+
+  datasource:
+    hikari:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://DBip:8080/order_test?serverTimezone=Asia/Seoul
+      username: root
+      password: root
+
+logging:
+  config: classpath:logback.xml

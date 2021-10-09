@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.navercorp.ordertest.mapper.OrderMapper">
+
+    <select id="selectOrderKey" resultType="string">
+        SELECT MAX(id) + 1
+        FROM Order_base
+    </select>
+
+    <select id="selectPaymentKey" resultType="string">
+        SELECT MAX(id) + 1
+        FROM Payment_detail
+    </select>
+
+    <insert id="createOrder" parameterType="OrderDto">
+        INSERT INTO Order_base(id, userId, addrId, deliveryCost, totalCost, orderDateTime, status)
+        VALUES (#{id}, #{userId}, #{addrId}, #{deliveryCost}, #{totalCost}, #{orderDateTime}, #{status})
+    </insert>
+
+    <insert id="createOrderDetail" parameterType="OrderDetailDto">
+        INSERT INTO Order_detail(orderId, itemId, option1_value, option2_value, quantity, status)
+        VALUES (#{orderId}, #{itemId}, #{option1_value}, #{option2_value}, #{quantity}, #{status})
+    </insert>
+
+    <insert id="createPaymentDetail" parameterType="PaymentDetailDto">
+        INSERT INTO Payment_detail(orderId, pkgSeq, paymentDateTime, pgId, paySeq, pgApprovalNo, receiptType, totalAmount, supplyAmount, taxAmount, orderNo, receiptSeq, tradeType)
+        VALUES (#{orderId}, #{pkgSeq}, #{paymentDateTime}, #{pgId}, #{paySeq}, #{pgApprovalNo}, #{receiptType}, #{totalAmount}, #{supplyAmount}, #{taxAmount}, #{orderNo}, #{receiptSeq}, #{tradeType})
+    </insert>
+</mapper>

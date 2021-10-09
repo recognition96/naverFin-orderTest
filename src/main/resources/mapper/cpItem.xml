@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.navercorp.ordertest.mapper.CpItemMapper">
+
+    <insert id="createCpItem" parameterType="CpItemDto">
+        INSERT INTO Cp_Item(cpId, itemId)
+        VALUES (#{cpId}, #{itemId})
+    </insert>
+
+    <select id="getCpIdList" resultType="CpItemDto">
+        SELECT cpId, itemId
+        FROM Cp_Item
+    </select>
+
+    <select id="getItemIdList" parameterType="int" resultType="int">
+        SELECT itemId
+        FROM Cp_Item
+        WHERE cpId = #{cpId}
+    </select>
+
+    <delete id="deleteCpItem" parameterType="CpItemDto">
+        DELETE
+        FROM Cp_Item
+        WHERE cpId = #{cpId}
+        <if test="itemId gt 0">
+          AND itemId = #{itemId}
+        </if>
+    </delete>
+</mapper>
